@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wine Quality Predictor</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      grid-gap: 10px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input {
+      height: 20px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      grid-column: span 3;
+      align-self: center;
+      justify-self: center;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="input-container">
+      <label for="fixedAcidity">Fixed Acidity:</label>
+      <input type="number" name="fixedAcidity" id="fixedAcidity" placeholder="Enter Fixed Acidity" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="volatileAcidity">Volatile Acidity:</label>
+      <input type="number" name="volatileAcidity" id="volatileAcidity" placeholder="Enter Volatile Acidity" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="citricAcid">Citric Acid:</label>
+      <input type="number" name="citricAcid" id="citricAcid" placeholder="Enter Citric Acid" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="residualSugar">Residual Sugar:</label>
+      <input type="number" name="residualSugar" id="residualSugar" placeholder="Enter Residual Sugar" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="chlorides">Chlorides:</label>
+      <input type="number" name="chlorides" id="chlorides" placeholder="Enter Chlorides" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="freeSulfurDioxide">Free Sulfur Dioxide:</label>
+      <input type="number" name="freeSulfurDioxide" id="freeSulfurDioxide" placeholder="Enter Free Sulfur Dioxide"
+        step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="totalSulfurDioxide">Total Sulfur Dioxide:</label>
+      <input type="number" name="totalSulfurDioxide" id="totalSulfurDioxide" placeholder="Enter Total Sulfur Dioxide"
+        step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="density">Density:</label>
+      <input type="number" name="density" id="density" placeholder="Enter Density" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="pH">pH:</label>
+      <input type="number" name="pH" id="pH" placeholder="Enter pH" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="sulphates">Sulphates:</label>
+      <input type="number" name="sulphates" id="sulphates" placeholder="Enter Sulphates" step="any">
+    </div>
+
+    <div class="input-container">
+      <label for="alcohol">Alcohol:</label>
+      <input type="number" name="alcohol" id="alcohol" placeholder="Enter Alcohol" step="any">
+    </div>
+
+    <button type="button" onclick="predict()">Predict</button>
+  </div>
+
+  <script>
+    function predict() {
+      var data = {
+        fixedAcidity: parseFloat(document.getElementById('fixedAcidity').value),
+        volatileAcidity: parseFloat(document.getElementById('volatileAcidity').value),
+        citricAcid: parseFloat(document.getElementById('citricAcid').value),
+        residualSugar: parseFloat(document.getElementById('residualSugar').value),
+        chlorides: parseFloat(document.getElementById('chlorides').value),
+        freeSulfurDioxide: parseFloat(document.getElementById('freeSulfurDioxide').value),
+        totalSulfurDioxide: parseFloat(document.getElementById('totalSulfurDioxide').value),
+        density: parseFloat(document.getElementById('density').value),
+        pH: parseFloat(document.getElementById('pH').value),
+        sulphates: parseFloat(document.getElementById('sulphates').value),
+        alcohol: parseFloat(document.getElementById('alcohol').value),
+      };
+
+      // Send a POST request to Flask server for prediction
+      fetch('/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then(response => response.json())
+        .then(result => {
+          // Redirect to the result page
+          window.location.href = '/result?quality=' + result.quality;
+        })
+        .catch(error => {
+          console.error('Error predicting quality:', error);
+          alert('Error predicting quality.');
+        });
+    }
+  </script>
+  </body>
+</html>

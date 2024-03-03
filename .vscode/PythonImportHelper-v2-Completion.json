@@ -1,0 +1,209 @@
+[
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "joblib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "joblib",
+        "description": "joblib",
+        "detail": "joblib",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_ucirepo",
+        "importPath": "ucimlrepo",
+        "description": "ucimlrepo",
+        "isExtraImport": true,
+        "detail": "ucimlrepo",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_ucirepo",
+        "importPath": "ucimlrepo",
+        "description": "ucimlrepo",
+        "isExtraImport": true,
+        "detail": "ucimlrepo",
+        "documentation": {}
+    },
+    {
+        "label": "MLPRegressor",
+        "importPath": "sklearn.neural_network",
+        "description": "sklearn.neural_network",
+        "isExtraImport": true,
+        "detail": "sklearn.neural_network",
+        "documentation": {}
+    },
+    {
+        "label": "MLPRegressor",
+        "importPath": "sklearn.neural_network",
+        "description": "sklearn.neural_network",
+        "isExtraImport": true,
+        "detail": "sklearn.neural_network",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "StandardScaler",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "def index():\n    return render_template(\"index.html\", variables=variables)\n@app.route(\"/predict\", methods=[\"POST\"])\ndef predict():\n    data = request.json  # Get data from the JSON request\n    # Use the loaded model to make predictions\n    model = joblib.load(\"model.joblib\")\n    features = np.array(list(data.values())).reshape(1, -1)\n    quality_prediction = model.predict(features)\n    # Return the prediction as JSON",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "predict",
+        "kind": 2,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "def predict():\n    data = request.json  # Get data from the JSON request\n    # Use the loaded model to make predictions\n    model = joblib.load(\"model.joblib\")\n    features = np.array(list(data.values())).reshape(1, -1)\n    quality_prediction = model.predict(features)\n    # Return the prediction as JSON\n    return jsonify({\"quality\": round(float(quality_prediction[0]), 2)})\n@app.route(\"/result\")\ndef result():",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "result",
+        "kind": 2,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "def result():\n    quality = request.args.get(\"quality\")\n    return render_template(\"result.html\", quality=quality)\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "app = Flask(__name__)\n# Fetch the wine quality dataset\nwine_quality = fetch_ucirepo(id=186)\nX = wine_quality.data.features\ny = wine_quality.data.targets\n# Instantiate MLPRegressor\ntrained_model = MLPRegressor(hidden_layer_sizes=(100,), max_iter=1000)\n# Assuming y is a pandas DataFrame\ny_array = np.array(y)\n# Flatten the target variable y",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "wine_quality",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "wine_quality = fetch_ucirepo(id=186)\nX = wine_quality.data.features\ny = wine_quality.data.targets\n# Instantiate MLPRegressor\ntrained_model = MLPRegressor(hidden_layer_sizes=(100,), max_iter=1000)\n# Assuming y is a pandas DataFrame\ny_array = np.array(y)\n# Flatten the target variable y\ny_flattened = y_array.ravel()\n# Train the model",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "X = wine_quality.data.features\ny = wine_quality.data.targets\n# Instantiate MLPRegressor\ntrained_model = MLPRegressor(hidden_layer_sizes=(100,), max_iter=1000)\n# Assuming y is a pandas DataFrame\ny_array = np.array(y)\n# Flatten the target variable y\ny_flattened = y_array.ravel()\n# Train the model\ntrained_model.fit(X, y_flattened)",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "y",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "y = wine_quality.data.targets\n# Instantiate MLPRegressor\ntrained_model = MLPRegressor(hidden_layer_sizes=(100,), max_iter=1000)\n# Assuming y is a pandas DataFrame\ny_array = np.array(y)\n# Flatten the target variable y\ny_flattened = y_array.ravel()\n# Train the model\ntrained_model.fit(X, y_flattened)\n# Save the trained model using joblib",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "trained_model",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "trained_model = MLPRegressor(hidden_layer_sizes=(100,), max_iter=1000)\n# Assuming y is a pandas DataFrame\ny_array = np.array(y)\n# Flatten the target variable y\ny_flattened = y_array.ravel()\n# Train the model\ntrained_model.fit(X, y_flattened)\n# Save the trained model using joblib\njoblib.dump(trained_model, \"model.joblib\")\n# Define the variables used in the form",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "y_array",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "y_array = np.array(y)\n# Flatten the target variable y\ny_flattened = y_array.ravel()\n# Train the model\ntrained_model.fit(X, y_flattened)\n# Save the trained model using joblib\njoblib.dump(trained_model, \"model.joblib\")\n# Define the variables used in the form\nvariables = [\n    \"fixed acidity\",",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "y_flattened",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "y_flattened = y_array.ravel()\n# Train the model\ntrained_model.fit(X, y_flattened)\n# Save the trained model using joblib\njoblib.dump(trained_model, \"model.joblib\")\n# Define the variables used in the form\nvariables = [\n    \"fixed acidity\",\n    \"volatile acidity\",\n    \"citric acid\",",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "variables",
+        "kind": 5,
+        "importPath": "Task3.pip",
+        "description": "Task3.pip",
+        "peekOfCode": "variables = [\n    \"fixed acidity\",\n    \"volatile acidity\",\n    \"citric acid\",\n    \"residual sugar\",\n    \"chlorides\",\n    \"free sulfur dioxide\",\n    \"total sulfur dioxide\",\n    \"density\",\n    \"pH\",",
+        "detail": "Task3.pip",
+        "documentation": {}
+    },
+    {
+        "label": "create_model",
+        "kind": 2,
+        "importPath": "Task3.trained_model",
+        "description": "Task3.trained_model",
+        "peekOfCode": "def create_model():\n    # Fetch the wine quality dataset\n    wine_quality = fetch_ucirepo(id=186)\n    # Select the 11 features and the target variable\n    X = wine_quality.data.features\n    y = wine_quality.data.targets\n    # Normalize features using StandardScaler\n    scaler = StandardScaler()\n    X = scaler.fit_transform(X)\n    # Define the model (MLP Regressor)",
+        "detail": "Task3.trained_model",
+        "documentation": {}
+    }
+]
